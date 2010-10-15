@@ -21,50 +21,6 @@ subtype 'Direction'
    => where { $_ =~ m/^(up|down|left|right)$/i }
    => message { "$_ is not a valid direction. Use up, down, left or right" };
 
-
-
-=head1 NAME
-
-Image::Simple::Gradient - The great new Image::Simple::Gradient!
-
-=head1 VERSION
-
-Version 0.01
-
-=cut
-
-our $VERSION = '0.01';
-
-
-=head1 SYNOPSIS
-
-Create simple gradient images with this module.
-If you are looking for a way to render a gradient image going from one color to another color, this is the module for it. 
-Its useful when your designer needs an easy simple way to generate gradient colors for a webpage or application software.
-
-direction can be: up, down, left, right.
-height and width: in pixels.
-color_begin and color_end are rgb hex values  with 6 digits. ex: FF0000
-
-    use Image::Simple::Gradient;
-
-    my $image = Image::Simple::Gradient->new({
-        color_begin => 'FF0000', 
-        color_end => '0000FF', 
-        direction => 'up', 
-        height => 100,
-        width => 200,
-        });
-    print $image->render_gradient();
-
-
-=head1 EXPORT
-
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
-
-=head1 SUBROUTINES/METHODS
-
 has [qw( width height )] => ( is => 'ro', isa => 'Int', required => 1, ); 
 has [qw( color_begin color_end )] => ( is => 'ro', isa => 'Rgbhex', required => 1, );
 has direction => (
@@ -156,6 +112,50 @@ sub render_gradient  {
 
         return $im->jpeg(100);
 }
+
+
+=head1 NAME
+
+Image::Simple::Gradient - The great new Image::Simple::Gradient!
+
+=head1 VERSION
+
+Version 0.02
+
+=cut
+
+our $VERSION = '0.02';
+
+
+=head1 SYNOPSIS
+
+Create simple gradient images with this module.
+If you are looking for a way to render a gradient image going from one color to another color, this is the module for it. 
+Its useful when your designer needs an easy simple way to generate gradient colors for a webpage or application software.
+
+direction can be: up, down, left, right.
+height and width: in pixels.
+color_begin and color_end are rgb hex values  with 6 digits. ex: FF0000
+
+    use Image::Simple::Gradient;
+
+    my $image = Image::Simple::Gradient->new({
+        color_begin => 'FF0000', 
+        color_end => '0000FF', 
+        direction => 'up', 
+        height => 100,
+        width => 200,
+        });
+    print $image->render_gradient();
+
+
+=head1 EXPORT
+
+A list of functions that can be exported.  You can delete this section
+if you don't export anything, such as for a purely object-oriented module.
+
+=head1 SUBROUTINES/METHODS
+
 
 
 
