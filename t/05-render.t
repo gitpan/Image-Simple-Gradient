@@ -26,6 +26,7 @@ diag( "Testing Image::Simple::Gradient $Image::Simple::Gradient::VERSION, Perl $
 sub write_test {
   my ($im, $filename) = @_;
   local *FH;
+  fail("could not render image") if not defined $im;
 
   if (open FH, "> $filename") {
     binmode FH;
