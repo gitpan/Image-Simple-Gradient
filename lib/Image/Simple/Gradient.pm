@@ -116,15 +116,15 @@ sub render_gradient  {
 
 =head1 NAME
 
-Image::Simple::Gradient - The great new Image::Simple::Gradient!
+Image::Simple::Gradient for your perl application.
 
 =head1 VERSION
 
-Version 0.02
+Version 0.04
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.04';
 
 
 =head1 SYNOPSIS
@@ -146,7 +146,14 @@ color_begin and color_end are rgb hex values  with 6 digits. ex: FF0000
         height => 100,
         width => 200,
         });
-    print $image->render_gradient();
+    my $im = $image->render_gradient();
+
+    if (open FH, "> my_gradient.jpg") {
+      binmode FH;
+      my $IO = fileno(FH);
+      print FH $im, $filename;
+      }
+
 
 
 =head1 EXPORT
