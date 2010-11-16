@@ -17,23 +17,23 @@ subtype 'Rgbhex'
    => message { "$_ is not a valid RBG Hex. ie. FFFFFF" };
 
 subtype 'Direction'
-   => as 'Str' 
+   => as 'Str'
    => where { $_ =~ m/^(up|down|left|right)$/i }
    => message { "$_ is not a valid direction. Use up, down, left or right" };
 
-has [qw( width height )] => ( is => 'ro', isa => 'Int', required => 1, ); 
+has [qw( width height )] => ( is => 'ro', isa => 'Int', required => 1, );
 has [qw( color_begin color_end )] => ( is => 'ro', isa => 'Rgbhex', required => 1, );
 has direction => (
     is => 'ro',
     isa => 'Direction',
-    required => 1, 
+    required => 1,
     );
 
 sub BUILD {
     my ( $self, $params ) = @_;
 }
 
-sub mkramp  
+sub mkramp
 {
     my ( $self, $im, $steps, $r0, $g0, $b0, $r1, $g1, $b1 ) = @_;
     my $dr   = ( $r1 - $r0 ) / $steps;
@@ -116,21 +116,21 @@ sub render_gradient  {
 
 =head1 NAME
 
-Image::Simple::Gradient for your perl application.
+Image::Simple::Gradient create simple gradients for your perl web / software application.
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =cut
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 
 =head1 SYNOPSIS
 
 Create simple gradient images with this module.
-If you are looking for a way to render a gradient image going from one color to another color, this is the module for it. 
+If you are looking for a way to render a gradient image going from one color to another color, this is the module for it.
 Its useful when your designer needs an easy simple way to generate gradient colors for a webpage or application software.
 
 direction can be: up, down, left, right.
@@ -139,10 +139,10 @@ color_begin and color_end are rgb hex values  with 6 digits. ex: FF0000
 
     use Image::Simple::Gradient;
 
-    my $image = Image::Simple::Gradient->new({
-        color_begin => 'FF0000', 
-        color_end => '0000FF', 
-        direction => 'up', 
+    my $im = Image::Simple::Gradient->new({
+        color_begin => 'FF0000',
+        color_end => '0000FF',
+        direction => 'up',
         height => 100,
         width => 200,
         });
@@ -164,21 +164,42 @@ if you don't export anything, such as for a purely object-oriented module.
 =head1 SUBROUTINES/METHODS
 
 
+=over
+
+=item new( HASH_REF );
+
+A hash reference must be passed on construction.
+
+Follow the example:
+
+    my $image = Image::Simple::Gradient->new({
+        color_begin => 'FF0000',
+        color_end => '0000FF',
+        direction => 'up',
+        height => 100,
+        width => 200,
+        });
 
 
+=item render_gradient();
 
-=head1 AUTHOR
+Renders the image and returns a jpg. ie:
+
+    my $im = $image->render_gradient();
+
+=head1 MODULE AUTHOR
 
 Hernan Lopes, C<< <hernanlopes at gmail.com> >>
+
+=head1 ORIGINAL AUTHOR
+
+Michal Guerquin, C<< <michalg at gmail.com> >>
 
 =head1 BUGS
 
 Please report any bugs or feature requests to C<bug-image-simple-gradient at rt.cpan.org>, or through
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Image-Simple-Gradient>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
-
-
-
 
 =head1 SUPPORT
 
